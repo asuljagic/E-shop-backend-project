@@ -4,7 +4,8 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const cors = require('cors');
-
+const authJwt = require('./helpers/jwt');
+const errorHandler = require('./helpers/error-handler');
 
 require('dotenv/config');
 app.use(cors());
@@ -23,7 +24,8 @@ const ordersRoutes = require("./routes/orders");
 // middleware
 app.use(bodyParser.json());
 app.use(morgan('tiny'));
-
+app.use(authJwt); //added authentication security for APIs
+app.use(errorHandler);
 
 // routers
 app.use(`${api}/categories`, categoriesRoutes);
@@ -32,6 +34,8 @@ app.use(`${api}/users`, usersRoutes);
 app.use(`${api}/orders`, ordersRoutes);
 
 const Product = require('./models/product');
+const authJwt = require('./helpers/jwt');
+const errorHandler = require('./helpers/error-handler');
 
 
 
