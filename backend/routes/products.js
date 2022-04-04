@@ -5,8 +5,12 @@ const router = express.Router();
 const mongoose = require('mongoose');
 
 router.get(`/`, async (req,res) => {
+    let filter = {};
     // can select some contents of product table by using select()
-    const productList = await Product.find();
+    if(req.query.categories){
+         filter ={category: req.query.categories.split(',')}
+    }
+    const productList = await Product.find(filter);
 
     if(!productList){
         res.status(500).json({success: false})
