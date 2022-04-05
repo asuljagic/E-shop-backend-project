@@ -34,8 +34,7 @@ app.use(`${api}/users`, usersRoutes);
 app.use(`${api}/orders`, ordersRoutes);
 
 const Product = require('./models/product');
-const authJwt = require('./helpers/jwt');
-const errorHandler = require('./helpers/error-handler');
+
 
 
 
